@@ -1,7 +1,10 @@
 fusion_weights:
-  severe:   { alpha: 0.3, beta: 0.3, gamma: 0.4 }
-  moderate: { alpha: 0.4, beta: 0.3, gamma: 0.3 }
-  mild:     { alpha: 0.5, beta: 0.3, gamma: 0.2 }
+  # alpha=whisper  beta=gpt2  gamma=fingerprint  delta=word_validity
+  # Severe: trust word-validity most (Whisper output is heavily garbled).
+  # Mild: trust Whisper more (output is closer to correct).
+  severe:   { alpha: 0.1, beta: 0.1, gamma: 0.2, delta: 0.6 }
+  moderate: { alpha: 0.2, beta: 0.15, gamma: 0.2, delta: 0.45 }
+  mild:     { alpha: 0.35, beta: 0.2, gamma: 0.15, delta: 0.3 }
 
 candidate_generation:
   top_k_per_phoneme: 3

@@ -2,7 +2,11 @@
 Score fusion: combines whisper, gpt2, and fingerprint scores into a single
 combined score using severity-adapted weights from config.
 
-combined = α·whisper + β·gpt2 + γ·fingerprint
+combined = α·norm(whisper) + β·norm(gpt2) + γ·norm(fingerprint)
+
+Each dimension is min-max normalised across the candidate set so that no single
+scorer dominates due to magnitude differences (GPT2 log-probs are ~5× larger
+in magnitude than fingerprint scores). Normalisation is applied only when std > 0.
 
 Run standalone for local verification:
     python -m src.fusion
@@ -10,7 +14,18 @@ Run standalone for local verification:
 
 from __future__ import annotations
 
+import math
 from pathlib import Path
+
+
+def _minmax_normalise(values: list[float]) -> list[float]:
+    """Normalise a list of floats to [0, 1] using min-max scaling.
+    If all values are equal, return 0.5 for each."""
+    lo, hi = min(values), max(values)
+    rng = hi - lo
+    if rng < 1e-12:
+        return [0.5] * len(values)
+    return [(v - lo) / rng for v in values]
 
 
 def fuse(
@@ -30,6 +45,9 @@ def fuse(
     weights_config is the fusion_weights section of config.yaml, e.g.:
       { "severe": {"alpha": 0.3, "beta": 0.3, "gamma": 0.4}, ... }
     """
+    if not candidates:
+        return candidates
+
     # Normalise severity key; fall back to "moderate" if unknown
     sev = severity.lower()
     if sev not in weights_config:
@@ -39,12 +57,22 @@ def fuse(
     beta: float = w["beta"]     # gpt2 weight
     gamma: float = w["gamma"]   # fingerprint weight
 
-    for c in candidates:
-        c["combined"] = (
-            alpha * c.get("whisper_score", 0.0)
-            + beta * c.get("gpt2_score", 0.0)
-            + gamma * c.get("fingerprint_score", 0.0)
-        )
+    delta: float = w.get("delta", 0.0)   # word-validity weight (optional)
+
+    # Extract raw score vectors
+    ws = [c.get("whisper_score", 0.0) for c in candidates]
+    gs = [c.get("gpt2_score", 0.0) for c in candidates]
+    fs = [c.get("fingerprint_score", 0.0) for c in candidates]
+    # word_validity_score is already in [0,1] so no normalisation needed
+    vs = [c.get("word_validity_score", 0.5) for c in candidates]
+
+    # Normalise log-prob dimensions independently to [0, 1]
+    ws_n = _minmax_normalise(ws)
+    gs_n = _minmax_normalise(gs)
+    fs_n = _minmax_normalise(fs)
+
+    for c, wn, gn, fn, vn in zip(candidates, ws_n, gs_n, fs_n, vs):
+        c["combined"] = alpha * wn + beta * gn + gamma * fn + delta * vn
 
     candidates.sort(key=lambda x: x["combined"], reverse=True)
     return candidates
