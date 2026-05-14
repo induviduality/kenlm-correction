@@ -141,14 +141,14 @@ def run_correction(
 
     cands = result["candidates"]
     debug_lines = [
-        "| # | Text | Combined | Whisper | GPT2 | Fingerprint | Source |",
-        "|---|------|----------|---------|------|-------------|--------|",
+        "| # | Text | Combined | Whisper | GPT2 | Fingerprint | WordValid | Source |",
+        "|---|------|----------|---------|------|-------------|-----------|--------|",
     ]
     for c in cands:
         debug_lines.append(
             f"| {c['rank']} | {c['text']} | {c['combined']} | "
             f"{c['whisper_score']} | {c['gpt2_score']} | "
-            f"{c['fingerprint_score']} | {c['source']} |"
+            f"{c['fingerprint_score']} | {c.get('word_validity_score', '')} | {c['source']} |"
         )
     trigger = result.get("trigger_reason") or "—"
     debug_lines.append(f"\n**Confidence trigger:** {trigger}")

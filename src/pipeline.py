@@ -109,12 +109,19 @@ def correct(
                 "source": "whisper",
             }
 
+    # Sentinel: phoneme-only candidates were not seen by Whisper at all.
+    # Use a value well below the worst Whisper score so they normalise
+    # to 0.0 on the whisper dimension after min-max normalization.
+    _whisper_floor = (
+        min((e.get("score", 0.0) for e in whisper_nbest), default=0.0) - 5.0
+    )
+
     for c in phoneme_candidates:
         key = _normalize(c["text"])
         if key not in merged:
             merged[key] = {
                 "text": c["text"],
-                "whisper_score": 0.0,   # not in whisper n-best
+                "whisper_score": _whisper_floor,
                 "source": "phoneme",
                 "generation_score": c.get("generation_score", 0.0),
             }
@@ -136,7 +143,7 @@ def correct(
         c["gpt2_score"] = s
 
     # ------------------------------------------------------------------
-    # 4. Fingerprint scoring
+    # 4. Fingerprint + word-validity scoring
     # ------------------------------------------------------------------
     smoothing = scoring_cfg.get("fingerprint_smoothing", 0.01)
     for c in all_candidates:
@@ -146,6 +153,7 @@ def correct(
             fingerprint=fingerprint,
             smoothing=smoothing,
         )
+        c["word_validity_score"] = scoring.word_validity_score(c["text"])
 
     # ------------------------------------------------------------------
     # 5. Fuse scores
@@ -159,7 +167,14 @@ def correct(
     # ------------------------------------------------------------------
     # 6. Confidence assessment
     # ------------------------------------------------------------------
-    conf_result = conf.assess_confidence(ranked, config.get("confidence", {}))
+    whisper_nbest_count = sum(
+        1 for e in whisper_nbest if e.get("text", "").strip()
+    )
+    conf_result = conf.assess_confidence(
+        ranked,
+        config.get("confidence", {}),
+        whisper_nbest_count=whisper_nbest_count,
+    )
 
     # ------------------------------------------------------------------
     # 7. Build output contract
@@ -177,6 +192,7 @@ def correct(
                 "whisper_score": round(c.get("whisper_score", 0.0), 4),
                 "gpt2_score": round(c.get("gpt2_score", 0.0), 4),
                 "fingerprint_score": round(c.get("fingerprint_score", 0.0), 4),
+                "word_validity_score": round(c.get("word_validity_score", 0.0), 4),
                 "source": c.get("source", ""),
             }
             for c in ranked
@@ -242,7 +258,8 @@ if __name__ == "__main__":
         print(
             f"  #{c['rank']}  combined={c['combined']:7.4f}  "
             f"w={c['whisper_score']:6.3f} g={c['gpt2_score']:6.3f} "
-            f"f={c['fingerprint_score']:6.3f}  [{c['source']}] '{c['text']}'"
+            f"f={c['fingerprint_score']:6.3f} v={c.get('word_validity_score',0):4.2f}"
+            f"  [{c['source']}] '{c['text']}'"
         )
 
     print("\nDONE")
