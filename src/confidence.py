@@ -72,6 +72,7 @@ def _softmax_top1_prob(scores: list[float]) -> float:
 def assess_confidence(
     ranked_candidates: list[dict],
     config: dict,
+    whisper_nbest_count: int = 0,
 ) -> dict:
     """
     Parameters
@@ -81,6 +82,11 @@ def assess_confidence(
         Each dict must have at least "text" and "combined" keys.
     config : dict
         The "confidence" section of config.yaml.
+    whisper_nbest_count : int
+        Number of unique hypotheses Whisper provided. Controls how many
+        alternatives are returned when ambiguous:
+          - 0 or 1  → return at most 1 alternative (only top-1)
+          - 2+      → return min(whisper_nbest_count, 3) alternatives (capped at 3)
 
     Returns
     -------
@@ -94,9 +100,15 @@ def assess_confidence(
     thresh_score: float = config.get("min_score_threshold", -3.0)
     thresh_gap: float = config.get("score_gap_threshold", 0.15)
     thresh_var: float = config.get("variance_threshold", 0.05)
-    alt_min: int = config.get("top_n_alternatives_min", 3)
-    alt_max: int = config.get("top_n_alternatives_max", 5)
     cutoff_gap: float = config.get("alternative_cutoff_gap", 0.4)
+
+    # How many alternatives to surface when ambiguous
+    if whisper_nbest_count <= 1:
+        alt_min = 1
+        alt_cap = 1
+    else:
+        alt_cap = min(whisper_nbest_count, 3)
+        alt_min = alt_cap
 
     deduped = _deduplicate(ranked_candidates)
 
@@ -144,17 +156,17 @@ def assess_confidence(
         ]
     else:
         status = "ambiguous"
-        # Collect alternatives within the cutoff gap
+        # Collect alternatives within the cutoff gap, up to alt_cap
         alts = []
         for i, c in enumerate(deduped):
-            if i >= alt_max:
+            if i >= alt_cap:
                 break
             if i > 0 and (top1_score - c["combined"]) > cutoff_gap:
                 break
             alts.append(
                 {"text": c["text"], "score": round(c["combined"], 4), "rank": i + 1}
             )
-        # Always return at least alt_min (pad from deduped if available)
+        # Pad to alt_min if we have enough candidates
         while len(alts) < alt_min and len(alts) < len(deduped):
             i = len(alts)
             c = deduped[i]
