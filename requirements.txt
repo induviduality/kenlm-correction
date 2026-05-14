@@ -1,0 +1,11 @@
+transformers>=4.40
+torch>=2.2
+g2p-en
+nltk
+numpy
+gradio>=4.0
+jiwer
+pyyaml
+huggingface_hub
+fastapi
+uvicorn

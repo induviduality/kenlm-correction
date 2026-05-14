@@ -1,0 +1,27 @@
+fusion_weights:
+  severe:   { alpha: 0.3, beta: 0.3, gamma: 0.4 }
+  moderate: { alpha: 0.4, beta: 0.3, gamma: 0.3 }
+  mild:     { alpha: 0.5, beta: 0.3, gamma: 0.2 }
+
+candidate_generation:
+  top_k_per_phoneme: 3
+  beam_width: 10
+  max_candidates: 20
+
+confidence:
+  min_score_threshold: -3.0
+  score_gap_threshold: 0.15
+  variance_threshold: 0.05
+  top_n_alternatives_min: 3
+  top_n_alternatives_max: 5
+  alternative_cutoff_gap: 0.4
+
+scoring:
+  fingerprint_smoothing: 0.01
+  gpt2_batch_size: 40
+  gpt2_max_length: 128
+
+model:
+  gpt2_name: "distilgpt2"
+  # "auto" detects CUDA and falls back to CPU automatically
+  device: "auto"

@@ -1,0 +1,152 @@
+[
+  {
+    "id": "F01_test_01",
+    "speaker_id": "F01",
+    "dataset": "TORGO",
+    "severity": "severe",
+    "reference": "he dresses himself",
+    "whisper_nbest": [
+      {"text": "e dresse imself", "score": -2.3},
+      {"text": "he dresses himself", "score": -2.8},
+      {"text": "he addresses himself", "score": -3.1},
+      {"text": "he dresses themself", "score": -3.4},
+      {"text": "he processes himself", "score": -3.8}
+    ],
+    "observed_phonemes": ["IY", "D", "R", "EH", "S", "IY", "M", "S", "EH", "L", "F"]
+  },
+  {
+    "id": "F01_test_02",
+    "speaker_id": "F01",
+    "dataset": "TORGO",
+    "severity": "severe",
+    "reference": "share",
+    "whisper_nbest": [
+      {"text": "sear", "score": -1.5},
+      {"text": "sare", "score": -1.8},
+      {"text": "share", "score": -2.2},
+      {"text": "stare", "score": -2.6},
+      {"text": "spare", "score": -2.9}
+    ],
+    "observed_phonemes": ["S", "EH", "R"]
+  },
+  {
+    "id": "F01_test_03",
+    "speaker_id": "F01",
+    "dataset": "TORGO",
+    "severity": "severe",
+    "reference": "grow",
+    "whisper_nbest": [
+      {"text": "row", "score": -1.2},
+      {"text": "grow", "score": -1.8},
+      {"text": "crow", "score": -2.1},
+      {"text": "groan", "score": -2.5},
+      {"text": "go", "score": -2.7}
+    ],
+    "observed_phonemes": ["R", "OW"]
+  },
+  {
+    "id": "F01_test_04",
+    "speaker_id": "F01",
+    "dataset": "TORGO",
+    "severity": "severe",
+    "reference": "lead",
+    "whisper_nbest": [
+      {"text": "ed", "score": -1.4},
+      {"text": "lead", "score": -2.0},
+      {"text": "read", "score": -2.1},
+      {"text": "bead", "score": -2.4},
+      {"text": "dead", "score": -2.5}
+    ],
+    "observed_phonemes": ["IY", "D"]
+  },
+  {
+    "id": "F01_test_05",
+    "speaker_id": "F01",
+    "dataset": "TORGO",
+    "severity": "severe",
+    "reference": "dark",
+    "whisper_nbest": [
+      {"text": "are", "score": -1.3},
+      {"text": "dark", "score": -1.9},
+      {"text": "park", "score": -2.0},
+      {"text": "bark", "score": -2.1},
+      {"text": "car", "score": -2.3}
+    ],
+    "observed_phonemes": ["D", "AA", "K"]
+  },
+  {
+    "id": "M01_test_01",
+    "speaker_id": "M01",
+    "dataset": "TORGO",
+    "severity": "severe",
+    "reference": "single",
+    "whisper_nbest": [
+      {"text": "ingle", "score": -1.5},
+      {"text": "single", "score": -2.1},
+      {"text": "signal", "score": -2.4},
+      {"text": "simple", "score": -2.7},
+      {"text": "jingle", "score": -2.9}
+    ],
+    "observed_phonemes": ["IH", "NG", "G", "AH", "L"]
+  },
+  {
+    "id": "M01_test_02",
+    "speaker_id": "M01",
+    "dataset": "TORGO",
+    "severity": "severe",
+    "reference": "bug",
+    "whisper_nbest": [
+      {"text": "ug", "score": -1.2},
+      {"text": "bug", "score": -1.9},
+      {"text": "mug", "score": -2.0},
+      {"text": "jug", "score": -2.2},
+      {"text": "hug", "score": -2.4}
+    ],
+    "observed_phonemes": ["AH", "G"]
+  },
+  {
+    "id": "M01_test_03",
+    "speaker_id": "M01",
+    "dataset": "TORGO",
+    "severity": "severe",
+    "reference": "nine",
+    "whisper_nbest": [
+      {"text": "ine", "score": -1.3},
+      {"text": "nine", "score": -2.0},
+      {"text": "wine", "score": -2.2},
+      {"text": "mine", "score": -2.3},
+      {"text": "fine", "score": -2.5}
+    ],
+    "observed_phonemes": ["N", "AY", "N"]
+  },
+  {
+    "id": "UASpeech_M07_test_01",
+    "speaker_id": "M07",
+    "dataset": "UASpeech",
+    "severity": "mild",
+    "reference": "the weather outside is frightful",
+    "whisper_nbest": [
+      {"text": "the weather outside is frightful", "score": -1.8},
+      {"text": "the weather outside is frightening", "score": -2.5},
+      {"text": "the weather outside is delightful", "score": -3.2},
+      {"text": "weather outside is frightful", "score": -3.4},
+      {"text": "the whether outside is frightful", "score": -3.6}
+    ],
+    "observed_phonemes": ["DH", "AH", "W", "EH", "DH", "ER", "AW", "T", "S", "AY", "D", "IH", "Z", "F", "R", "AY", "T", "F", "AH", "L"]
+  },
+  {
+    "id": "UASpeech_M07_test_02",
+    "speaker_id": "M07",
+    "dataset": "UASpeech",
+    "severity": "mild",
+    "reference": "open the window",
+    "whisper_nbest": [
+      {"text": "open the window", "score": -1.5},
+      {"text": "open the windows", "score": -2.0},
+      {"text": "open a window", "score": -2.3},
+      {"text": "open the windo", "score": -2.5},
+      {"text": "open the winner", "score": -2.9}
+    ],
+    "observed_phonemes": ["OW", "P", "AH", "N", "DH", "AH", "W", "IH", "N", "D", "OW"]
+  }
+]
