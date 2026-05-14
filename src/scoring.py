@@ -85,7 +85,7 @@ def gpt2_score(
         attention_mask = encodings["attention_mask"].to(_device)
 
         with torch.no_grad():
-            outputs = _model(input_ids)
+            outputs = _model(input_ids, attention_mask=attention_mask)
             logits = outputs.logits  # [B, T, V]
 
         log_probs = F.log_softmax(logits, dim=-1)  # [B, T, V]
@@ -138,8 +138,13 @@ def _phonemize(text: str) -> list[str]:
     """Convert text to a list of Arpabet phonemes (stress stripped, no spaces)."""
     g2p = _get_g2p()
     raw = g2p(text.lower())
-    # g2p returns phonemes and ' ' for word boundaries
-    return [_strip_stress(p) for p in raw if p.strip() and p.isalpha()]
+    # Strip stress FIRST, then filter — avoids dropping "IH1", "EH1" etc.
+    result = []
+    for p in raw:
+        stripped = _strip_stress(p)
+        if stripped and stripped.isalpha():
+            result.append(stripped)
+    return result
 
 
 # ---------------------------------------------------------------------------
@@ -251,11 +256,70 @@ def fingerprint_score(
     return float(np.mean(log_probs))
 
 
-def whisper_score(confidence: float) -> float:
-    """Convert Whisper 0-1 confidence to log-prob so it's on the same scale
-    as GPT2 and fingerprint scores for fusion.
-    Clamps to [1e-9, 1] to avoid log(0)."""
-    return math.log(max(float(confidence), 1e-9))
+def whisper_score(log_prob: float) -> float:
+    """Pass-through: Whisper n-best scores are already log-probabilities."""
+    return float(log_prob)
+
+
+# ---------------------------------------------------------------------------
+# Word-validity score — Brown corpus frequency list
+#
+# Uses words that appear ≥ 2 times in the Brown corpus (a representative
+# sample of American English). This captures inflected forms like "dresses",
+# "himself", "addresses" but excludes obscure proper nouns and non-words like
+# "eade", "reh", "dresse", "imself".
+# ---------------------------------------------------------------------------
+_brown_word_set: set[str] | None = None
+
+
+def _get_brown_word_set() -> set[str]:
+    global _brown_word_set
+    if _brown_word_set is not None:
+        return _brown_word_set
+    import nltk
+    for corpus in ("brown", "averaged_perceptron_tagger_eng"):
+        try:
+            nltk.data.find(f"corpora/{corpus}" if corpus == "brown" else f"taggers/{corpus}")
+        except LookupError:
+            nltk.download(corpus, quiet=True)
+    from nltk.corpus import brown as brown_corpus
+    freq: dict[str, int] = {}
+    for word in brown_corpus.words():
+        w = word.lower()
+        freq[w] = freq.get(w, 0) + 1
+    # Keep words that appear at least twice (filters out hapax legomena and names)
+    _brown_word_set = set(w for w, c in freq.items() if c >= 2)
+    return _brown_word_set
+
+
+_SINGLE_LETTER_WORDS = {"a", "i"}  # only valid standalone single-letter words
+
+
+def word_validity_score(text: str) -> float:
+    """
+    Fraction of words in `text` that are common English.
+
+    Rules:
+    - Single-letter tokens: only "a" and "i" count as valid.
+    - Multi-letter tokens: must appear ≥ 2 times in the Brown corpus.
+
+    Correctly scores:
+      "he dresses himself"    → 1.0  (all in Brown)
+      "e dresse imself"       → 0.0  ("e" excluded; "dresse"/"imself" not in Brown)
+      "eade reh seam shh elf" → 0.4  ("seam" + "elf" in Brown)
+    """
+    word_set = _get_brown_word_set()
+    tokens = re.sub(r"[^\w\s]", "", text.lower()).split()
+    if not tokens:
+        return 0.0
+
+    def _valid(t: str) -> bool:
+        if len(t) == 1:
+            return t in _SINGLE_LETTER_WORDS
+        return t in word_set
+
+    valid = sum(1 for t in tokens if _valid(t))
+    return valid / len(tokens)
 
 
 # ---------------------------------------------------------------------------
