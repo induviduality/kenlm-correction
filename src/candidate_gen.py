@@ -245,7 +245,7 @@ if __name__ == "__main__":
     print("\n[1] Inverse error map (top 5 entries):")
     inv = _build_inverse_map(fingerprint)
     for obs, cands in list(inv.items())[:5]:
-        print(f"  observed={obs:6s}  →  {cands[:3]}")
+        print(f"  observed={obs:6s}  ->  {cands[:3]}")
 
     print("\n[2] Beam search (top 5 sequences):")
     inv_map = _build_inverse_map(fingerprint)
