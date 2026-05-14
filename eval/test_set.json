@@ -6,11 +6,11 @@
     "severity": "severe",
     "reference": "he dresses himself",
     "whisper_nbest": [
-      {"text": "e dresse imself", "score": -2.3},
-      {"text": "he dresses himself", "score": -2.8},
-      {"text": "he addresses himself", "score": -3.1},
-      {"text": "he dresses themself", "score": -3.4},
-      {"text": "he processes himself", "score": -3.8}
+      {"text": "e dresse imself", "score": 0.42},
+      {"text": "he dresses himself", "score": 0.21},
+      {"text": "he addresses himself", "score": 0.14},
+      {"text": "he dresses themself", "score": 0.11},
+      {"text": "he processes himself", "score": 0.07}
     ],
     "observed_phonemes": ["IY", "D", "R", "EH", "S", "IY", "M", "S", "EH", "L", "F"]
   },
@@ -21,11 +21,11 @@
     "severity": "severe",
     "reference": "share",
     "whisper_nbest": [
-      {"text": "sear", "score": -1.5},
-      {"text": "sare", "score": -1.8},
-      {"text": "share", "score": -2.2},
-      {"text": "stare", "score": -2.6},
-      {"text": "spare", "score": -2.9}
+      {"text": "sear", "score": 0.38},
+      {"text": "sare", "score": 0.25},
+      {"text": "share", "score": 0.17},
+      {"text": "stare", "score": 0.11},
+      {"text": "spare", "score": 0.06}
     ],
     "observed_phonemes": ["S", "EH", "R"]
   },
@@ -36,11 +36,11 @@
     "severity": "severe",
     "reference": "grow",
     "whisper_nbest": [
-      {"text": "row", "score": -1.2},
-      {"text": "grow", "score": -1.8},
-      {"text": "crow", "score": -2.1},
-      {"text": "groan", "score": -2.5},
-      {"text": "go", "score": -2.7}
+      {"text": "row", "score": 0.40},
+      {"text": "grow", "score": 0.24},
+      {"text": "crow", "score": 0.16},
+      {"text": "groan", "score": 0.10},
+      {"text": "go", "score": 0.06}
     ],
     "observed_phonemes": ["R", "OW"]
   },
@@ -51,11 +51,11 @@
     "severity": "severe",
     "reference": "lead",
     "whisper_nbest": [
-      {"text": "ed", "score": -1.4},
-      {"text": "lead", "score": -2.0},
-      {"text": "read", "score": -2.1},
-      {"text": "bead", "score": -2.4},
-      {"text": "dead", "score": -2.5}
+      {"text": "ed", "score": 0.35},
+      {"text": "lead", "score": 0.25},
+      {"text": "read", "score": 0.18},
+      {"text": "bead", "score": 0.12},
+      {"text": "dead", "score": 0.08}
     ],
     "observed_phonemes": ["IY", "D"]
   },
@@ -66,13 +66,28 @@
     "severity": "severe",
     "reference": "dark",
     "whisper_nbest": [
-      {"text": "are", "score": -1.3},
-      {"text": "dark", "score": -1.9},
-      {"text": "park", "score": -2.0},
-      {"text": "bark", "score": -2.1},
-      {"text": "car", "score": -2.3}
+      {"text": "are", "score": 0.36},
+      {"text": "dark", "score": 0.24},
+      {"text": "park", "score": 0.18},
+      {"text": "bark", "score": 0.12},
+      {"text": "car", "score": 0.07}
     ],
     "observed_phonemes": ["D", "AA", "K"]
+  },
+  {
+    "id": "F01_test_06",
+    "speaker_id": "F01",
+    "dataset": "TORGO",
+    "severity": "severe",
+    "reference": "storm",
+    "whisper_nbest": [
+      {"text": "orm", "score": 0.37},
+      {"text": "storm", "score": 0.25},
+      {"text": "form", "score": 0.16},
+      {"text": "swarm", "score": 0.12},
+      {"text": "warm", "score": 0.07}
+    ],
+    "observed_phonemes": ["S", "AO", "R", "M"]
   },
   {
     "id": "M01_test_01",
@@ -81,11 +96,11 @@
     "severity": "severe",
     "reference": "single",
     "whisper_nbest": [
-      {"text": "ingle", "score": -1.5},
-      {"text": "single", "score": -2.1},
-      {"text": "signal", "score": -2.4},
-      {"text": "simple", "score": -2.7},
-      {"text": "jingle", "score": -2.9}
+      {"text": "ingle", "score": 0.38},
+      {"text": "single", "score": 0.22},
+      {"text": "signal", "score": 0.16},
+      {"text": "simple", "score": 0.13},
+      {"text": "jingle", "score": 0.08}
     ],
     "observed_phonemes": ["IH", "NG", "G", "AH", "L"]
   },
@@ -96,11 +111,11 @@
     "severity": "severe",
     "reference": "bug",
     "whisper_nbest": [
-      {"text": "ug", "score": -1.2},
-      {"text": "bug", "score": -1.9},
-      {"text": "mug", "score": -2.0},
-      {"text": "jug", "score": -2.2},
-      {"text": "hug", "score": -2.4}
+      {"text": "ug", "score": 0.40},
+      {"text": "bug", "score": 0.22},
+      {"text": "mug", "score": 0.16},
+      {"text": "jug", "score": 0.12},
+      {"text": "hug", "score": 0.07}
     ],
     "observed_phonemes": ["AH", "G"]
   },
@@ -111,13 +126,253 @@
     "severity": "severe",
     "reference": "nine",
     "whisper_nbest": [
-      {"text": "ine", "score": -1.3},
-      {"text": "nine", "score": -2.0},
-      {"text": "wine", "score": -2.2},
-      {"text": "mine", "score": -2.3},
-      {"text": "fine", "score": -2.5}
+      {"text": "ine", "score": 0.36},
+      {"text": "nine", "score": 0.24},
+      {"text": "wine", "score": 0.17},
+      {"text": "mine", "score": 0.13},
+      {"text": "fine", "score": 0.08}
     ],
     "observed_phonemes": ["N", "AY", "N"]
+  },
+  {
+    "id": "M01_test_04",
+    "speaker_id": "M01",
+    "dataset": "TORGO",
+    "severity": "severe",
+    "reference": "if you are losing water replace it immediately",
+    "whisper_nbest": [
+      {"text": "if you are losing water replace it immediately", "score": 0.30},
+      {"text": "if you losing water replace immediately", "score": 0.22},
+      {"text": "if you are losing water replace immediately", "score": 0.18},
+      {"text": "you are losing water replace it immediately", "score": 0.15},
+      {"text": "if you losing water replace it", "score": 0.10}
+    ],
+    "observed_phonemes": ["IH", "F", "Y", "UW", "AE", "R", "L", "UW", "Z", "IH", "NG", "W", "AO", "T", "ER", "R", "IH", "P", "L", "EY", "S", "IH", "T", "IH", "M", "IY", "D", "IY", "AH", "T", "L", "IY"]
+  },
+  {
+    "id": "M04_test_01",
+    "speaker_id": "M04",
+    "dataset": "TORGO",
+    "severity": "severe",
+    "reference": "park",
+    "whisper_nbest": [
+      {"text": "ark", "score": 0.37},
+      {"text": "park", "score": 0.26},
+      {"text": "bark", "score": 0.17},
+      {"text": "mark", "score": 0.12},
+      {"text": "part", "score": 0.06}
+    ],
+    "observed_phonemes": ["AA", "R", "K"]
+  },
+  {
+    "id": "M04_test_02",
+    "speaker_id": "M04",
+    "dataset": "TORGO",
+    "severity": "severe",
+    "reference": "dark",
+    "whisper_nbest": [
+      {"text": "art", "score": 0.35},
+      {"text": "dark", "score": 0.26},
+      {"text": "dart", "score": 0.17},
+      {"text": "are", "score": 0.13},
+      {"text": "stark", "score": 0.06}
+    ],
+    "observed_phonemes": ["D", "AA", "R", "K"]
+  },
+  {
+    "id": "M04_test_03",
+    "speaker_id": "M04",
+    "dataset": "TORGO",
+    "severity": "severe",
+    "reference": "single",
+    "whisper_nbest": [
+      {"text": "ingle", "score": 0.36},
+      {"text": "single", "score": 0.24},
+      {"text": "signal", "score": 0.17},
+      {"text": "tingle", "score": 0.13},
+      {"text": "mingle", "score": 0.07}
+    ],
+    "observed_phonemes": ["IH", "NG", "G", "AH", "L"]
+  },
+  {
+    "id": "M04_test_04",
+    "speaker_id": "M04",
+    "dataset": "TORGO",
+    "severity": "severe",
+    "reference": "trouble",
+    "whisper_nbest": [
+      {"text": "ruble", "score": 0.34},
+      {"text": "trouble", "score": 0.26},
+      {"text": "double", "score": 0.18},
+      {"text": "rubble", "score": 0.13},
+      {"text": "tremble", "score": 0.07}
+    ],
+    "observed_phonemes": ["T", "R", "AH", "B", "AH", "L"]
+  },
+  {
+    "id": "F03_test_01",
+    "speaker_id": "F03",
+    "dataset": "TORGO",
+    "severity": "mild",
+    "reference": "meat",
+    "whisper_nbest": [
+      {"text": "meat", "score": 0.55},
+      {"text": "meet", "score": 0.20},
+      {"text": "beat", "score": 0.10},
+      {"text": "neat", "score": 0.08},
+      {"text": "heat", "score": 0.05}
+    ],
+    "observed_phonemes": ["M", "IY", "T"]
+  },
+  {
+    "id": "F03_test_02",
+    "speaker_id": "F03",
+    "dataset": "TORGO",
+    "severity": "mild",
+    "reference": "rain",
+    "whisper_nbest": [
+      {"text": "rain", "score": 0.58},
+      {"text": "rane", "score": 0.16},
+      {"text": "rein", "score": 0.12},
+      {"text": "reign", "score": 0.08},
+      {"text": "main", "score": 0.04}
+    ],
+    "observed_phonemes": ["R", "EY", "N"]
+  },
+  {
+    "id": "F03_test_03",
+    "speaker_id": "F03",
+    "dataset": "TORGO",
+    "severity": "mild",
+    "reference": "ship",
+    "whisper_nbest": [
+      {"text": "ship", "score": 0.52},
+      {"text": "chip", "score": 0.18},
+      {"text": "sip", "score": 0.14},
+      {"text": "trip", "score": 0.09},
+      {"text": "skip", "score": 0.05}
+    ],
+    "observed_phonemes": ["SH", "IH", "P"]
+  },
+  {
+    "id": "F04_test_01",
+    "speaker_id": "F04",
+    "dataset": "TORGO",
+    "severity": "mild",
+    "reference": "know",
+    "whisper_nbest": [
+      {"text": "know", "score": 0.50},
+      {"text": "no", "score": 0.22},
+      {"text": "now", "score": 0.14},
+      {"text": "snow", "score": 0.08},
+      {"text": "knob", "score": 0.04}
+    ],
+    "observed_phonemes": ["N", "OW"]
+  },
+  {
+    "id": "F04_test_02",
+    "speaker_id": "F04",
+    "dataset": "TORGO",
+    "severity": "mild",
+    "reference": "double",
+    "whisper_nbest": [
+      {"text": "double", "score": 0.48},
+      {"text": "trouble", "score": 0.20},
+      {"text": "bubble", "score": 0.14},
+      {"text": "couple", "score": 0.10},
+      {"text": "rubble", "score": 0.06}
+    ],
+    "observed_phonemes": ["D", "AH", "B", "AH", "L"]
+  },
+  {
+    "id": "M05_test_01",
+    "speaker_id": "M05",
+    "dataset": "TORGO",
+    "severity": "mild",
+    "reference": "car",
+    "whisper_nbest": [
+      {"text": "car", "score": 0.54},
+      {"text": "are", "score": 0.18},
+      {"text": "bar", "score": 0.12},
+      {"text": "far", "score": 0.09},
+      {"text": "tar", "score": 0.05}
+    ],
+    "observed_phonemes": ["K", "AA", "R"]
+  },
+  {
+    "id": "M05_test_02",
+    "speaker_id": "M05",
+    "dataset": "TORGO",
+    "severity": "mild",
+    "reference": "sheet",
+    "whisper_nbest": [
+      {"text": "sheet", "score": 0.50},
+      {"text": "she", "score": 0.19},
+      {"text": "cheat", "score": 0.14},
+      {"text": "seat", "score": 0.10},
+      {"text": "sweet", "score": 0.05}
+    ],
+    "observed_phonemes": ["SH", "IY", "T"]
+  },
+  {
+    "id": "UASpeech_F02_test_01",
+    "speaker_id": "F02",
+    "dataset": "UASpeech",
+    "severity": "severe",
+    "reference": "swimming",
+    "whisper_nbest": [
+      {"text": "imming", "score": 0.34},
+      {"text": "swimming", "score": 0.24},
+      {"text": "swinging", "score": 0.18},
+      {"text": "trimming", "score": 0.14},
+      {"text": "slimming", "score": 0.08}
+    ],
+    "observed_phonemes": ["S", "W", "IH", "M", "IH", "NG"]
+  },
+  {
+    "id": "UASpeech_F02_test_02",
+    "speaker_id": "F02",
+    "dataset": "UASpeech",
+    "severity": "severe",
+    "reference": "crayon",
+    "whisper_nbest": [
+      {"text": "ray on", "score": 0.32},
+      {"text": "crayon", "score": 0.26},
+      {"text": "creon", "score": 0.18},
+      {"text": "rayon", "score": 0.14},
+      {"text": "prion", "score": 0.08}
+    ],
+    "observed_phonemes": ["K", "R", "EY", "AA", "N"]
+  },
+  {
+    "id": "UASpeech_M04_test_01",
+    "speaker_id": "M04",
+    "dataset": "UASpeech",
+    "severity": "moderate",
+    "reference": "first",
+    "whisper_nbest": [
+      {"text": "first", "score": 0.45},
+      {"text": "fist", "score": 0.22},
+      {"text": "thirst", "score": 0.15},
+      {"text": "burst", "score": 0.10},
+      {"text": "worst", "score": 0.06}
+    ],
+    "observed_phonemes": ["F", "ER", "S", "T"]
+  },
+  {
+    "id": "UASpeech_M04_test_02",
+    "speaker_id": "M04",
+    "dataset": "UASpeech",
+    "severity": "moderate",
+    "reference": "lamp",
+    "whisper_nbest": [
+      {"text": "lamp", "score": 0.50},
+      {"text": "lam", "score": 0.20},
+      {"text": "damp", "score": 0.14},
+      {"text": "ramp", "score": 0.09},
+      {"text": "clamp", "score": 0.05}
+    ],
+    "observed_phonemes": ["L", "AE", "M", "P"]
   },
   {
     "id": "UASpeech_M07_test_01",
@@ -126,11 +381,11 @@
     "severity": "mild",
     "reference": "the weather outside is frightful",
     "whisper_nbest": [
-      {"text": "the weather outside is frightful", "score": -1.8},
-      {"text": "the weather outside is frightening", "score": -2.5},
-      {"text": "the weather outside is delightful", "score": -3.2},
-      {"text": "weather outside is frightful", "score": -3.4},
-      {"text": "the whether outside is frightful", "score": -3.6}
+      {"text": "the weather outside is frightful", "score": 0.52},
+      {"text": "the weather outside is frightening", "score": 0.18},
+      {"text": "the weather outside is delightful", "score": 0.12},
+      {"text": "weather outside is frightful", "score": 0.10},
+      {"text": "the whether outside is frightful", "score": 0.06}
     ],
     "observed_phonemes": ["DH", "AH", "W", "EH", "DH", "ER", "AW", "T", "S", "AY", "D", "IH", "Z", "F", "R", "AY", "T", "F", "AH", "L"]
   },
@@ -141,12 +396,57 @@
     "severity": "mild",
     "reference": "open the window",
     "whisper_nbest": [
-      {"text": "open the window", "score": -1.5},
-      {"text": "open the windows", "score": -2.0},
-      {"text": "open a window", "score": -2.3},
-      {"text": "open the windo", "score": -2.5},
-      {"text": "open the winner", "score": -2.9}
+      {"text": "open the window", "score": 0.56},
+      {"text": "open the windows", "score": 0.18},
+      {"text": "open a window", "score": 0.12},
+      {"text": "open the windo", "score": 0.08},
+      {"text": "open the winner", "score": 0.04}
     ],
     "observed_phonemes": ["OW", "P", "AH", "N", "DH", "AH", "W", "IH", "N", "D", "OW"]
+  },
+  {
+    "id": "UASpeech_F04_test_01",
+    "speaker_id": "F04",
+    "dataset": "UASpeech",
+    "severity": "moderate",
+    "reference": "scissors",
+    "whisper_nbest": [
+      {"text": "scissors", "score": 0.40},
+      {"text": "sisters", "score": 0.22},
+      {"text": "sissors", "score": 0.16},
+      {"text": "whispers", "score": 0.12},
+      {"text": "crisscross", "score": 0.07}
+    ],
+    "observed_phonemes": ["S", "IH", "Z", "ER", "Z"]
+  },
+  {
+    "id": "UASpeech_M12_test_01",
+    "speaker_id": "M12",
+    "dataset": "UASpeech",
+    "severity": "moderate",
+    "reference": "echo",
+    "whisper_nbest": [
+      {"text": "echo", "score": 0.46},
+      {"text": "eko", "score": 0.22},
+      {"text": "eggo", "score": 0.14},
+      {"text": "gecko", "score": 0.10},
+      {"text": "ecco", "score": 0.06}
+    ],
+    "observed_phonemes": ["EH", "K", "OW"]
+  },
+  {
+    "id": "UASpeech_M12_test_02",
+    "speaker_id": "M12",
+    "dataset": "UASpeech",
+    "severity": "moderate",
+    "reference": "slide",
+    "whisper_nbest": [
+      {"text": "slide", "score": 0.44},
+      {"text": "side", "score": 0.22},
+      {"text": "slid", "score": 0.16},
+      {"text": "sly", "score": 0.10},
+      {"text": "ride", "score": 0.06}
+    ],
+    "observed_phonemes": ["S", "L", "AY", "D"]
   }
 ]
