@@ -121,6 +121,9 @@ _g2p = None
 def _get_g2p():
     global _g2p
     if _g2p is None:
+        import nltk
+        nltk.download("averaged_perceptron_tagger_eng", quiet=True)
+        nltk.download("cmudict", quiet=True)
         from g2p_en import G2p
 
         _g2p = G2p()
@@ -248,9 +251,11 @@ def fingerprint_score(
     return float(np.mean(log_probs))
 
 
-def whisper_score(log_prob: float) -> float:
-    """Pass-through: Whisper n-best already provides log-probability scores."""
-    return float(log_prob)
+def whisper_score(confidence: float) -> float:
+    """Convert Whisper 0-1 confidence to log-prob so it's on the same scale
+    as GPT2 and fingerprint scores for fusion.
+    Clamps to [1e-9, 1] to avoid log(0)."""
+    return math.log(max(float(confidence), 1e-9))
 
 
 # ---------------------------------------------------------------------------
