@@ -1,3 +1,24 @@
 fingerprints/
 demo_data/
 .venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Build / packaging
+*.egg-info/
+dist/
+build/
+
+# uv
+.uv/
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
