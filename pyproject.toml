@@ -19,11 +19,12 @@ dependencies = [
     "huggingface-hub",
     "fastapi",
     "uvicorn",
+    "openai-whisper>=20250625",
 ]
-
-[project.optional-dependencies]
-dev = ["pytest>=7.0", "black", "ruff"]
 
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["src*"]
+
+[dependency-groups]
+dev = ["pytest>=7.0", "black", "ruff"]
