@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dysarthric-correction"
+version = "0.1.0"
+description = "Dysarthric speech correction using phoneme fingerprints and DistilGPT2"
+requires-python = ">=3.10"
+dependencies = [
+    "transformers>=4.40",
+    "torch>=2.2",
+    "g2p-en",
+    "nltk",
+    "numpy",
+    "gradio>=4.0",
+    "jiwer",
+    "pyyaml",
+    "huggingface-hub",
+    "fastapi",
+    "uvicorn",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "black", "ruff"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
